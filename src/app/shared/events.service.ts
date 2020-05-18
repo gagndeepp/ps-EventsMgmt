@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { IEvent } from './i-event';
 
-const EVENTS = [
+const EVENTS: IEvent[]= [
   {
     id: 1,
     name: 'Chashmu Singh: The Concert',
@@ -317,11 +318,11 @@ const EVENTS = [
 export class EventsService {
   constructor() { }
 
-  getEvents(): any[]{
+  getEvents(): IEvent[]{
     return EVENTS;
   }
 
-  getEvent(id: number){
+  getEvent(id: number): IEvent{
     return EVENTS.find(event => event.id == id);
   }
 }

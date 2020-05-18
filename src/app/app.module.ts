@@ -11,7 +11,7 @@ import { RouterModule, Router } from '@angular/router';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { CanActivateEventService } from './shared/can-activate-event.service';
 import { ErrorComponent } from './shared/error/error.component';
-import { ConfirmCreateGuardService } from './confirm-create-guard.service';
+import { ConfirmCreateGuardService } from './shared/confirm-create-guard.service';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import { UserModule } from './user/user.module';
 
