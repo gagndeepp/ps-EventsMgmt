@@ -20,13 +20,17 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ng-fundamentals"
+    }
+  },
+  "defaultProject": "ng-fundamentals",
+  "cli": {
+    "analytics": "26601bd6-0d42-4c4e-8f6e-605fb8e4a89d"
+  }
 }

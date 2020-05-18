@@ -1,0 +1,10 @@
+<div class="well hoverwell thumbnail" >
+    <h4>{{event.name}}</h4>
+    <div>Date:> {{event.date}}</div>
+    <div>Time:> {{event.time}}</div>
+    <div>Price:> {{event.price}}</div>
+    <div>Address:>
+      {{event?.location?.address}}
+      {{event?.location?.city}}, {{event?.location?.country}}
+    </div>
+</div>
