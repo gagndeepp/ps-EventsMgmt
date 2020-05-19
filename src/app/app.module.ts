@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventsAppComponent } from './events-app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -12,8 +13,7 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { CanActivateEventService } from './shared/can-activate-event.service';
 import { ErrorComponent } from './shared/error/error.component';
 import { ConfirmCreateGuardService } from './shared/confirm-create-guard.service';
-import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
-import { UserModule } from './user/user.module';
+import { CreateSessionComponent } from './create-session/create-session.component';
 
 @NgModule({
   declarations: [
@@ -24,10 +24,13 @@ import { UserModule } from './user/user.module';
     EventsDetailComponent,
     CreateEventComponent,
     ErrorComponent,
+    CreateSessionComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
     ToastrModule.forRoot({
       progressBar: true,
       timeOut: 2000
@@ -35,6 +38,7 @@ import { UserModule } from './user/user.module';
     RouterModule.forRoot([
       { path: 'events', component: EventsListComponent },
       { path: 'error', component: ErrorComponent },
+      { path: 'sessions/new', component: CreateSessionComponent },
       { path: 'events/new', component: CreateEventComponent, canDeactivate: [ConfirmCreateGuardService]},
       { path: 'events/:id', component: EventsDetailComponent, canActivate: [CanActivateEventService] },
       { path: '', pathMatch: 'full', redirectTo: '/events' },

@@ -1,9 +1,19 @@
 <h1>Edit Your Profile</h1>
     <hr>
     <div class="col-md-6">
-      <h3>[Edit profile form will go here]</h3>
-      <br />
-      <br />
-      <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-default">Cancel</button>
+      <form [formGroup]="editForm" autocomplete="off" (ngSubmit)= "saveProfile(editForm.value)" novalidate>
+      <div class="form-group" [ngClass] = "{'error': !validatefirstNameField()}">
+        <label for="firstName">First Name:</label>
+        <em *ngIf = "!validatefirstNameField() && editForm.controls.firstNameField.errors.required" >Required</em>
+        <em *ngIf = "!validatefirstNameField() && editForm.controls.firstNameField.errors.pattern" >Must start with an character</em>
+        <input formControlName="firstNameField" id="firstName" type="text" class="form-control" placeholder="First Name..." />
+      </div>
+      <div class="form-group" [ngClass] = "{'error': !validatelastNameField()}" >
+        <label for="lastName">Last Name:</label>
+        <em *ngIf = "!validatelastNameField() && editForm.controls.lastNameField.errors.required" >Required</em>
+        <input formControlName="lastNameField" id="lastName" type="text" class="form-control" placeholder="Last Name..." />
+      </div>
+      <button type="submit" [disabled]="editForm.invalid" class="btn btn-primary">Save</button>
+      <button type="button" (click) = "doCancel()"class="btn btn-default">Cancel</button>
+    </form>
     </div>

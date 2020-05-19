@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IEvent } from './i-event';
-
+import { ISessions } from './i-event';
 const EVENTS: IEvent[]= [
   {
     id: 1,
@@ -320,6 +320,15 @@ export class EventsService {
 
   getEvents(): IEvent[]{
     return EVENTS;
+  }
+
+  saveUser(inputEvent){
+    let event: IEvent = inputEvent;
+    event.id = 92;
+    event.sessions = [];
+
+    console.log('event obj in saveUser>>' , event);
+    EVENTS.push(event);
   }
 
   getEvent(id: number): IEvent{
