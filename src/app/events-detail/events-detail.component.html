@@ -9,8 +9,6 @@
     </div>
   </div>
   <hr>
-
-
   <div class="row">
     <div class="col-md-6">
       <div><strong>Date:</strong> {{event?.date}}</div>
@@ -25,4 +23,11 @@
       </address>
     </div>
   </div>
+  <div class="row">
+  <h3 class="col-md-2">Sessions </h3>
+  <h3 > <a *ngIf= "toggleCreateSession" (click) = "toggle()"> {{toggleCreateSession ? 'Add Session' : 'Show Sessions'}} </a></h3>
+  </div>
+  <hr>
+  <app-sessions-list *ngIf="toggleCreateSession" [sessions] = "event?.sessions"></app-sessions-list>
+  <app-create-session (addNewSession) = "addNewSession($event)" (goBack) = "toggle()" *ngIf="!toggleCreateSession"></app-create-session>
 </div>

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { EventsService } from '../shared/events.service';
-import { IEvent } from '../shared/i-event';
+import { IEvent, ISessions } from '../shared/i-event';
 @Component({
   selector: 'app-events-detail',
   templateUrl: './events-detail.component.html',
   styleUrls: ['./events-detail.component.css']
 })
 export class EventsDetailComponent implements OnInit {
-
+  toggleCreateSession: boolean = true;
   event: IEvent;
   constructor(private activatedRoute: ActivatedRoute, private EventService: EventsService) { }
 
@@ -16,5 +16,18 @@ export class EventsDetailComponent implements OnInit {
       this.event = this.EventService.getEvent(+this.activatedRoute.snapshot.params['id']);
   }
 
+  toggle(){
+    this.toggleCreateSession = !this.toggleCreateSession;
+  }
+
+  addNewSession(session: ISessions){
+    session.id = Math.max.apply('',this.event.sessions.map(s=> s.id)) + 1;
+    session.voters = [];
+
+    console.log('addnew Sessions' ,session);
+    this.event.sessions.push(session);
+    this.EventService.updateEvent(this.event);
+    this.toggleCreateSession = !this.toggleCreateSession;
+  }
 
 }

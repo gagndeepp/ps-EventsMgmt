@@ -2,7 +2,7 @@
   <h1>Events List</h1>
   <hr>
 <div class="row">
-  <div class = "col-md-4" *ngFor="let eventObj of events">
+  <div class = "col-md-6" *ngFor="let eventObj of events">
     <app-events-thumbnail [routerLink] = "[ '/events' , eventObj.id] " (click) = "onEventClickHandler(eventObj.name)" [event]="eventObj"></app-events-thumbnail>
   </div>
 </div>

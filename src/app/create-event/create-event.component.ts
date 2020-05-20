@@ -17,7 +17,7 @@ export class CreateEventComponent implements OnInit {
   }
 
   saveEvent(formValues){
-    this.eventService.saveUser(formValues);
+    this.eventService.saveEvent(formValues);
     this.formComplete = true;
     this.router.navigate(['/events']);
   }

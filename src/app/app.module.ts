@@ -14,7 +14,8 @@ import { CanActivateEventService } from './shared/can-activate-event.service';
 import { ErrorComponent } from './shared/error/error.component';
 import { ConfirmCreateGuardService } from './shared/confirm-create-guard.service';
 import { CreateSessionComponent } from './create-session/create-session.component';
-
+import { SessionsListComponent } from './sessions-list/sessions-list.component';
+import { SessionContentComponent } from './sessions-list/session-content.component';
 @NgModule({
   declarations: [
     EventsAppComponent,
@@ -25,6 +26,8 @@ import { CreateSessionComponent } from './create-session/create-session.componen
     CreateEventComponent,
     ErrorComponent,
     CreateSessionComponent,
+    SessionsListComponent,
+    SessionContentComponent
   ],
   imports: [
     BrowserModule,

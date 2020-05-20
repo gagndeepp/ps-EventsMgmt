@@ -1,0 +1,4 @@
+<div class="well pointable" (click) = "toggle()" >
+    <ng-content select="[sessionTitle]"></ng-content>
+    <ng-content *ngIf="showBody" select="[sessionBody]"></ng-content>
+</div>

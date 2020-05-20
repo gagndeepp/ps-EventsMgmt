@@ -1,0 +1,24 @@
+<div class="row" *ngFor="let session of sessions">
+  <div class="col-md-10">
+    <session-content>
+      <div sessionTitle class="row">
+        <span>{{session.name}} </span>
+        <i
+          *ngIf="session.voters.length > 1"
+          class=" glyphicon glyphicon-fire"
+        ></i>
+        <i
+          *ngIf="session.voters.length > 1"
+          class=" glyphicon glyphicon-fire"
+        ></i>
+      </div>
+      <div sessionBody >
+        <h6>{{ session.presenter }}</h6>
+        <span>Duration: {{ session.duration }}</span
+        ><br />
+        <span>Level: {{ session.level }}</span>
+        <p>{{ session.abstract }}</p>
+      </div>
+    </session-content>
+  </div>
+</div>

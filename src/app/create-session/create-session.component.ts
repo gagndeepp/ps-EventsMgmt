@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators} from '@angular/forms';
+import { EventEmitter } from '@angular/core';
+import { ISessions } from '../shared/i-event';
 @Component({
   selector: 'app-create-session',
   templateUrl: './create-session.component.html',
@@ -13,6 +15,8 @@ export class CreateSessionComponent implements OnInit {
   level: FormControl;
   abstract: FormControl;
 
+  @Output() addNewSession= new EventEmitter();
+  @Output() goBack = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -36,7 +40,12 @@ export class CreateSessionComponent implements OnInit {
   }
 
   saveSession(formValues){
-    console.log('Ssavve Sessionn> ', formValues);
+    let session: ISessions = formValues;
+    this.addNewSession.emit(session);
+  }
+
+  doGoBack(){
+    this.goBack.emit();
   }
 
 }

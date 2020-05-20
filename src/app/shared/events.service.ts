@@ -322,13 +322,17 @@ export class EventsService {
     return EVENTS;
   }
 
-  saveUser(inputEvent){
+  saveEvent(inputEvent){
     let event: IEvent = inputEvent;
     event.id = 92;
     event.sessions = [];
-
     console.log('event obj in saveUser>>' , event);
     EVENTS.push(event);
+  }
+
+  updateEvent(event: IEvent){
+    const index = EVENTS.findIndex(x => x.id = event.id);
+    EVENTS[index] = event;
   }
 
   getEvent(id: number): IEvent{
