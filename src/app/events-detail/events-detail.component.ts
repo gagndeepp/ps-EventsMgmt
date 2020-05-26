@@ -15,7 +15,12 @@ export class EventsDetailComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private EventService: EventsService) { }
 
   ngOnInit(): void {
-      this.event = this.EventService.getEvent(+this.activatedRoute.snapshot.params['id']);
+      this.EventService.getEvent(+this.activatedRoute.snapshot.params['id']).subscribe({
+        next: observableEvent => {
+          this.event = observableEvent;
+          console.log('event Detail event fetch' , observableEvent);
+        }
+      });
   }
 
   toggle(){
@@ -23,12 +28,18 @@ export class EventsDetailComponent implements OnInit {
   }
 
   addNewSession(session: ISessions){
+
     session.id = Math.max.apply('',this.event.sessions.map(s=> s.id)) + 1;
+
+    console.log("session id >  " , session.id);
+
+    if (session.id < 0)
+      session.id = 1;
     session.voters = [];
 
     console.log('addnew Sessions' ,session);
     this.event.sessions.push(session);
-    this.EventService.updateEvent(this.event);
+    this.EventService.saveEvent(this.event).subscribe();
     this.toggleCreateSession = !this.toggleCreateSession;
   }
 

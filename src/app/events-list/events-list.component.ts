@@ -14,7 +14,13 @@ export class EventsListComponent implements OnInit {
   constructor(private eventsService: EventsService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-      this.events = this.eventsService.getEvents();
+      this.eventsService.getEvents().subscribe({
+        next: observableEvents => {
+            this.events = observableEvents;
+            console.log('this is happening in subscribe > ' , observableEvents);
+        },
+        error: err => console.log('in events-list > ' , err)
+    });
   }
 
   onEventClickHandler(message: string){

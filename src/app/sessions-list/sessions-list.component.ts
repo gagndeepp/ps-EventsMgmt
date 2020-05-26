@@ -12,9 +12,13 @@ export class SessionsListComponent implements OnInit, OnChanges {
   @Input() sessions: ISessions[];
   @Input() filterSessionBy: string;
   @Input() sortSessionsBy: string;
+  @Input() eventId: number;
   visibleSessions: ISessions[];
 
-  constructor(private voterService:VoterService,public authService: AuthUserService) {}
+  constructor(
+    private voterService: VoterService,
+    public authService: AuthUserService
+  ) {}
   ngOnChanges(): void {
     if (this.sessions) {
       this.doFilterSession();
@@ -25,15 +29,26 @@ export class SessionsListComponent implements OnInit, OnChanges {
   }
 
   toggleVote(session: ISessions) {
-    if(this.userVoted(session)){
-      this.voterService.removeVote(session, this.authService.currentUser.userName);
-    }else{
-      this.voterService.addVote(session, this.authService.currentUser.userName);
+    if (this.userVoted(session)) {
+      this.voterService.removeVote(
+        this.eventId,
+        session,
+        this.authService.currentUser.userName
+      );
+    } else {
+      this.voterService.addVote(
+        this.eventId,
+        session,
+        this.authService.currentUser.userName
+      );
     }
   }
 
-  userVoted(session: ISessions):boolean{
-      return this.voterService.userVoted(session, this.authService.currentUser.userName);
+  userVoted(session: ISessions): boolean {
+    return this.voterService.userVoted(
+      session,
+      this.authService.currentUser.userName
+    );
   }
 
   doFilterSession() {

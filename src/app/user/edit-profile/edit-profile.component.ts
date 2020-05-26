@@ -34,10 +34,20 @@ export class EditProfileComponent implements OnInit {
 
   saveProfile(formValues){
     if(this.editForm.valid){
-      this.authService.updateUser(formValues.firstNameField, formValues.lastNameField);
-      this.router.navigate(['/events']);
+      this.authService.updateUser(formValues.firstNameField, formValues.lastNameField).subscribe(
+        () => {
+          this.router.navigate(['/events']);
+        }
+      );
+
     }
 
+  }
+
+  doLogout(){
+    this.authService.doLogout().subscribe(() => {
+      this.router.navigate(['/events']);
+    })
   }
 
   doCancel(){

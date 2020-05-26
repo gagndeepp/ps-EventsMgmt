@@ -5,24 +5,26 @@ import { EventsService } from '../shared/events.service';
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
-  styleUrls: ['./create-event.component.css']
+  styleUrls: ['./create-event.component.css'],
 })
 export class CreateEventComponent implements OnInit {
   newEvent: any;
   formComplete: boolean = false;
 
-  constructor(private router: Router,private eventService: EventsService) { }
+  constructor(private router: Router, private eventService: EventsService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  saveEvent(formValues) {
+    this.eventService.saveEvent(formValues).subscribe({
+      next: (x) => {
+        console.log('saveEvent Data Whatever it is' ,  x);
+        this.formComplete = true;
+        this.router.navigate(['/events']);
+      },
+    });
   }
-
-  saveEvent(formValues){
-    this.eventService.saveEvent(formValues);
-    this.formComplete = true;
+  cancel() {
     this.router.navigate(['/events']);
   }
-  cancel(){
-    this.router.navigate(['/events']);
-  }
-
 }

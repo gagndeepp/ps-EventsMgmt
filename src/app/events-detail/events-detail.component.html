@@ -41,6 +41,6 @@
   <a class="col-md-2" style="float: right; padding: 15px; background-color: crimson; color: whitesmoke;" *ngIf= "toggleCreateSession" (click) = "toggle()"> {{toggleCreateSession ? 'Add Session' : 'Show Sessions'}} </a>
   </div>
   <hr>
-  <app-sessions-list *ngIf="toggleCreateSession" [sortSessionsBy] = "sortSessionsBy" [filterSessionBy] = "filterSessionBy"[sessions] = "event?.sessions"></app-sessions-list>
+  <app-sessions-list [eventId] = "event?.id" *ngIf="toggleCreateSession" [sortSessionsBy] = "sortSessionsBy" [filterSessionBy] = "filterSessionBy" [sessions] = "event?.sessions"></app-sessions-list>
   <app-create-session (addNewSession) = "addNewSession($event)" (goBack) = "toggle()" *ngIf="!toggleCreateSession"></app-create-session>
 </div>
