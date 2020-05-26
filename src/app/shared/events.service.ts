@@ -322,6 +322,10 @@ export class EventsService {
     return EVENTS;
   }
 
+  searchSessions(searchQuery: string){
+    //pending implementation
+  }
+
   saveEvent(inputEvent){
     let event: IEvent = inputEvent;
     event.id = 92;

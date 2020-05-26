@@ -10,6 +10,8 @@ import { IEvent, ISessions } from '../shared/i-event';
 export class EventsDetailComponent implements OnInit {
   toggleCreateSession: boolean = true;
   event: IEvent;
+  filterSessionBy: string = 'all';
+  sortSessionsBy: string = 'votes';
   constructor(private activatedRoute: ActivatedRoute, private EventService: EventsService) { }
 
   ngOnInit(): void {

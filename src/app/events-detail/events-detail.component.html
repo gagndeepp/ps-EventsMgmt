@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <h2>{{event?.name}} </h2>
+      <h2>{{event?.name | uppercase}} </h2>
     </div>
     <div  class="col-md-6">
       <img [src]="event?.imageUrl" [alt]="event?.name">
@@ -11,9 +11,9 @@
   <hr>
   <div class="row">
     <div class="col-md-6">
-      <div><strong>Date:</strong> {{event?.date}}</div>
+      <div><strong>Date:</strong> {{event?.date | date:'shortDate'}}</div>
       <div><strong>Time:</strong> {{event?.time}}</div>
-      <div><strong>Price:</strong> ${{event?.price}}</div>
+      <div><strong>Price:</strong> {{event?.price | currency:'INR'}}</div>
     </div>
     <div class="col-md-6">
       <address>
@@ -23,11 +23,24 @@
       </address>
     </div>
   </div>
+
   <div class="row">
-  <h3 class="col-md-2">Sessions </h3>
-  <h3 > <a *ngIf= "toggleCreateSession" (click) = "toggle()"> {{toggleCreateSession ? 'Add Session' : 'Show Sessions'}} </a></h3>
+  <span class="col-md-2" style=" padding: 15px;float:left; background-color: crimson; color: whitesmoke;">Sessions </span>
+  <div class="col-md-5 align-middle btn-group-sm" >
+    Filter By:
+    <button class="btn btn-primary" [class.active] = "filterSessionBy ==='all'" (click) = "filterSessionBy='all'">All</button>
+    <button class="btn btn-primary" [class.active] = "filterSessionBy ==='beginner'" (click) = "filterSessionBy='beginner'">Beginner</button>
+    <button class="btn btn-primary" [class.active] = "filterSessionBy ==='intermediate'" (click) = "filterSessionBy='intermediate'">Intermediate</button>
+    <button class="btn btn-primary" [class.active] = "filterSessionBy ==='advanced'" (click) = "filterSessionBy='advanced'">Advanced</button>
+  </div>
+  <div class="col-md-3 align-middle btn-group-sm" >
+    Sort By:
+    <button class="btn btn-primary" [class.active] = "sortSessionsBy ==='name'" (click) = "sortSessionsBy='name'">By Name</button>
+    <button class="btn btn-primary" [class.active] = "sortSessionsBy ==='votes'" (click) = "sortSessionsBy='votes'">By Votes</button>
+  </div>
+  <a class="col-md-2" style="float: right; padding: 15px; background-color: crimson; color: whitesmoke;" *ngIf= "toggleCreateSession" (click) = "toggle()"> {{toggleCreateSession ? 'Add Session' : 'Show Sessions'}} </a>
   </div>
   <hr>
-  <app-sessions-list *ngIf="toggleCreateSession" [sessions] = "event?.sessions"></app-sessions-list>
+  <app-sessions-list *ngIf="toggleCreateSession" [sortSessionsBy] = "sortSessionsBy" [filterSessionBy] = "filterSessionBy"[sessions] = "event?.sessions"></app-sessions-list>
   <app-create-session (addNewSession) = "addNewSession($event)" (goBack) = "toggle()" *ngIf="!toggleCreateSession"></app-create-session>
 </div>

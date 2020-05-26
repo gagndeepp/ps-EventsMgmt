@@ -1,8 +1,8 @@
 <div class="well hoverwell thumbnail" >
-    <h4>{{event.name}}</h4>
-    <div>Date:> {{event.date}}</div>
+    <h4>{{event.name | uppercase}}</h4>
+    <div>Date:> {{event.date | date:'shortDate' }}</div>
     <div>Time:> {{event.time}}</div>
-    <div>Price:> {{event.price}}</div>
+    <div>Price:> {{event.price | currency:'INR'}}</div>
     <div>Address:>
       {{event?.location?.address}}
       {{event?.location?.city}}, {{event?.location?.country}}

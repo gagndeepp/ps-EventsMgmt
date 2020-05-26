@@ -16,6 +16,9 @@ import { ConfirmCreateGuardService } from './shared/confirm-create-guard.service
 import { CreateSessionComponent } from './create-session/create-session.component';
 import { SessionsListComponent } from './sessions-list/sessions-list.component';
 import { SessionContentComponent } from './sessions-list/session-content.component';
+import { DurationPipe } from './shared/duration.pipe';
+import { UpvoteComponent } from './sessions-list/upvote.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     EventsAppComponent,
@@ -25,32 +28,44 @@ import { SessionContentComponent } from './sessions-list/session-content.compone
     EventsDetailComponent,
     CreateEventComponent,
     ErrorComponent,
+    UpvoteComponent,
     CreateSessionComponent,
     SessionsListComponent,
-    SessionContentComponent
+    SessionContentComponent,
+    DurationPipe,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       progressBar: true,
-      timeOut: 2000
+      timeOut: 2000,
     }),
     RouterModule.forRoot([
       { path: 'events', component: EventsListComponent },
       { path: 'error', component: ErrorComponent },
       { path: 'sessions/new', component: CreateSessionComponent },
-      { path: 'events/new', component: CreateEventComponent, canDeactivate: [ConfirmCreateGuardService]},
-      { path: 'events/:id', component: EventsDetailComponent, canActivate: [CanActivateEventService] },
+      {
+        path: 'events/new',
+        component: CreateEventComponent,
+        canDeactivate: [ConfirmCreateGuardService],
+      },
+      {
+        path: 'events/:id',
+        component: EventsDetailComponent,
+        canActivate: [CanActivateEventService],
+      },
       { path: '', pathMatch: 'full', redirectTo: '/events' },
       {
         path: 'user',
-        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+        loadChildren: () =>
+          import('./user/user.module').then((m) => m.UserModule),
       },
-    ])
+    ]),
   ],
-  bootstrap: [EventsAppComponent]
+  bootstrap: [EventsAppComponent],
 })
-export class AppModule { }
+export class AppModule {}
